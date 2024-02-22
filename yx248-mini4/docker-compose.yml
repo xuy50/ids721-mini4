@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 services:
   yx248-mini4:
     build: .
