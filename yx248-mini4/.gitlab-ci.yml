@@ -1,0 +1,24 @@
+stages:
+  - build
+  - test
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+before_script:
+  - docker info
+
+build:
+  stage: build
+  script:
+    - docker build -t yx248-mini4-image .
+  only:
+    - master
+
+test:
+  stage: test
+  script:
+    - docker run -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY yx248-mini4-image cargo test
+  only:
+    - master
